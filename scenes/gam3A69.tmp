@@ -1,11 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://dls1b1g6yy0ou"]
+[gd_scene load_steps=31 format=3 uid="uid://dls1b1g6yy0ou"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7iapm"]
 [ext_resource type="Texture2D" uid="uid://dof2blhvlvj82" path="res://assets/tileset/tileset_test.png" id="2_dptlh"]
+[ext_resource type="Texture2D" uid="uid://c00xvm3gu8aoo" path="res://assets/sprites/entities/player.png" id="2_g538t"]
 [ext_resource type="Texture2D" uid="uid://bgjlsne6ycih7" path="res://assets/sprites/temp.png" id="2_ksx3w"]
+[ext_resource type="Script" path="res://scripts/entities/player/player_movement.gd" id="2_pxvud"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="3_2aexd"]
 [ext_resource type="Script" path="res://scripts/tilemap.gd" id="3_utkyt"]
 [ext_resource type="Texture2D" uid="uid://srce8as2diqu" path="res://assets/sprites/selector.png" id="4_6vf6p"]
 [ext_resource type="Texture2D" uid="uid://klk66st807g3" path="res://assets/background/background_sky.png" id="4_aj4t7"]
+[ext_resource type="Script" path="res://scripts/tools/axe.gd" id="4_imxqx"]
 [ext_resource type="Texture2D" uid="uid://dhvauahtpymwf" path="res://assets/background/hills.png" id="5_keglr"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="5_kwdcy"]
 [ext_resource type="Texture2D" uid="uid://b2tnsas80qqxu" path="res://assets/background/sun.png" id="5_mr1y1"]
@@ -13,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://da3jx3kq3htfa" path="res://assets/background/trees.png" id="6_3empm"]
 [ext_resource type="Texture2D" uid="uid://l3v4ojwfa6p4" path="res://assets/background/clouds.png" id="6_vrqi4"]
 [ext_resource type="Texture2D" uid="uid://dgkgnqe0dfup8" path="res://assets/background/ground.png" id="7_xhskd"]
-[ext_resource type="PackedScene" uid="uid://obks6i6j4mi0" path="res://scenes/player.tscn" id="8_m436w"]
+[ext_resource type="Texture2D" uid="uid://dmb80a58btj7w" path="res://assets/sprites/axe.png" id="9_4cqo2"]
 [ext_resource type="PackedScene" uid="uid://b2k8g16j4wlab" path="res://scenes/enviorment/tree.tscn" id="17_uuo3r"]
 [ext_resource type="Texture2D" uid="uid://rqvv1rmb54xb" path="res://assets/sprites/cave.png" id="19_x06wb"]
 
@@ -47,6 +51,42 @@ sources/0 = SubResource("TileSetAtlasSource_0kxdq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brgm0"]
 size = Vector2(64, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fofdw"]
+radius = 3.25
+
+[sub_resource type="Animation" id="Animation_n18uq"]
+resource_name = "swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f72q2"]
+_data = {
+"swing": SubResource("Animation_n18uq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uksca"]
+size = Vector2(4, 15)
+
+[sub_resource type="Gradient" id="Gradient_3gvl5"]
+offsets = PackedFloat32Array(0, 0.718147)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mqb1c"]
+gradient = SubResource("Gradient_3gvl5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52hqe"]
 size = Vector2(604, 16)
@@ -91,7 +131,48 @@ texture = ExtResource("19_x06wb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave"]
 shape = SubResource("RectangleShape2D_brgm0")
 
-[node name="Player" parent="World" instance=ExtResource("8_m436w")]
+[node name="Player" type="CharacterBody2D" parent="World"]
+position = Vector2(153, -57)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_pxvud")
+jump_force = 200
+
+[node name="Inventory" type="Node" parent="World/Player"]
+script = ExtResource("3_2aexd")
+
+[node name="Tool" type="Area2D" parent="World/Player"]
+script = ExtResource("4_imxqx")
+tilemap_path = NodePath("../../TileMap")
+
+[node name="Sprite" type="Sprite2D" parent="World/Player/Tool"]
+texture = ExtResource("9_4cqo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player/Tool"]
+position = Vector2(9, 0)
+shape = SubResource("CircleShape2D_fofdw")
+
+[node name="SwingTimer" type="Timer" parent="World/Player/Tool"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Player/Tool"]
+libraries = {
+"": SubResource("AnimationLibrary_f72q2")
+}
+
+[node name="MainCamera" type="Camera2D" parent="World/Player"]
+position = Vector2(0, -54.025)
+zoom = Vector2(2.7, 2.7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_uksca")
+
+[node name="Body" type="Sprite2D" parent="World/Player"]
+texture = ExtResource("2_g538t")
+
+[node name="PointLight2D" type="PointLight2D" parent="World/Player"]
+visible = false
+texture = SubResource("GradientTexture2D_mqb1c")
 
 [node name="Ground" type="StaticBody2D" parent="World"]
 position = Vector2(0, 10)
@@ -180,3 +261,5 @@ position = Vector2(261, -47)
 
 [node name="Tree4" parent="World" instance=ExtResource("17_uuo3r")]
 position = Vector2(382, -48)
+
+[connection signal="timeout" from="World/Player/Tool/SwingTimer" to="World/Player/Tool" method="_on_swing_timer_timeout"]

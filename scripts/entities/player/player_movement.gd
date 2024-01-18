@@ -1,39 +1,38 @@
-extends "res://scripts/entities/player/player.gd"
+extends CharacterBody2D
 
-@export var speed = 60
-@export var jump_force = 250
-@export var gravity = 750
-@export var friction = 0.5
-@export var acceleration = 0.2
+@export var speed : float = 200.0
 
+@onready var body = $Body
+@onready var animation_tree = $AnimationTree
+@onready var character_state_machine = $CharacterStateMachine
 
-func _physics_process(delta: float) -> void:
-	var dir = get_direction()
-	var is_jump_interupted = Input.is_action_just_released("jump") and velocity.y < 0.0
-	velocity = calculate_velocity(velocity, dir, is_jump_interupted, speed, jump_force, delta)
-	move_and_slide()
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var direction : Vector2 = Vector2.ZERO
 
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
 
-func get_direction():
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		-1.0 if Input.is_action_just_pressed("jump") and is_on_floor() else 0.0
-	)
-
-func calculate_velocity(curVelocity, dir, is_jump_interupted, speed, jump_force, delta):
-	var out = Vector2.ZERO
-
-	if dir.x != 0:
-		out.x = lerp(curVelocity.x, dir.x * speed, acceleration)
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	direction = Input.get_vector("move_left", "move_right", "up", "down")
+	
+	if direction.x != 0 && character_state_machine.check_if_can_move():
+		velocity.x = direction.x * speed
 	else:
-		out.x = lerp(curVelocity.x, 0.0, friction)
+		velocity.x = move_toward(velocity.x, 0, speed)
 
-	if(dir.y == -1.0): # Jumping
-		out.y = dir.y * jump_force
-	else: # Falling
-		out.y = curVelocity.y + (gravity * delta)
+	move_and_slide()
+	update_animation_parameters()
+	update_facing_direction()
+	
+func update_animation_parameters():
+	animation_tree.set("parameters/Move/blend_position", direction.x)
 
-	if(is_jump_interupted): # jump key release
-		out.y = 0.0 + (gravity * delta)
-
-	return out
+func update_facing_direction():
+	if direction.x > 0:
+		body.flip_h = false
+	elif direction.x < 0:
+		body.flip_h = true
