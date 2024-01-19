@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed : float = 200.0
+@export var speed : float = 80.0
 
 @onready var body = $Body
 @onready var animation_tree = $AnimationTree
@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	direction = Input.get_vector("move_left", "move_right", "up", "down")
+	direction = Input.get_vector("move_left", "move_right", "ui_up", "ui_down")
 	
 	if direction.x != 0 && character_state_machine.check_if_can_move():
 		velocity.x = direction.x * speed
