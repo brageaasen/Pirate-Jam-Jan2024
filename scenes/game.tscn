@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dls1b1g6yy0ou"]
+[gd_scene load_steps=23 format=3 uid="uid://dls1b1g6yy0ou"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_7iapm"]
 [ext_resource type="Texture2D" uid="uid://dof2blhvlvj82" path="res://assets/tileset/tileset_test.png" id="2_dptlh"]
@@ -48,6 +48,12 @@ sources/0 = SubResource("TileSetAtlasSource_0kxdq")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brgm0"]
 size = Vector2(64, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw3lx"]
+size = Vector2(16, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxuat"]
+size = Vector2(16, 160)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52hqe"]
 size = Vector2(604, 16)
 
@@ -90,6 +96,16 @@ texture = ExtResource("19_x06wb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave"]
 shape = SubResource("RectangleShape2D_brgm0")
+
+[node name="EntranceWalls" type="StaticBody2D" parent="World/Cave"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(-24, 96)
+shape = SubResource("RectangleShape2D_pw3lx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(24, 96)
+shape = SubResource("RectangleShape2D_vxuat")
 
 [node name="Player" parent="World" instance=ExtResource("8_m436w")]
 

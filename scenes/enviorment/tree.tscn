@@ -9,7 +9,7 @@ size = Vector2(3, 59)
 [sub_resource type="CircleShape2D" id="CircleShape2D_0nomy"]
 radius = 2.0
 
-[node name="Tree" type="RigidBody2D"]
+[node name="Tree" type="RigidBody2D" groups=["tree"]]
 position = Vector2(91, -45)
 collision_layer = 8
 script = ExtResource("1_jpxwn")

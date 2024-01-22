@@ -1,7 +1,9 @@
 extends TileMap
 
 @export var max_x : int = 32
-@export var max_y : int = 8
+@export var max_y : int = 16
+
+var y_block_offset = 10
 
 var noise : FastNoiseLite = FastNoiseLite.new()
 
@@ -22,9 +24,9 @@ func _ready():
 func generate_level():
 	for x in max_x:
 		for y in max_y:
-			var tile_id = generate_id(noise.get_noise_2d(x, y))
+			var tile_id = generate_id(noise.get_noise_2d(x, y + y_block_offset))
 			if tile_id != -1:
-				set_cell(0, Vector2i(x, y), tile_id, Vector2i(1, 1))
+				set_cell(0, Vector2i(x, y + y_block_offset), tile_id, Vector2i(1, 1))
 
 func generate_id(noise_level : float):
 	if noise_level <= -0.3:
