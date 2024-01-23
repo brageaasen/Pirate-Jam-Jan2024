@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends "res://scripts/entities/entity.gd"
 
 @export var speed : float = 80.0
 
@@ -33,6 +33,7 @@ func _physics_process(delta):
 func update_animation_parameters():
 	animation_tree.set("parameters/Move/blend_position", direction.x)
 	animation_tree.set("parameters/fly/blend_position", direction.x)
+	animation_tree.set("parameters/walk/blend_position", direction.x)
 
 @onready var tool = $Tool
 
@@ -45,3 +46,26 @@ func update_facing_direction():
 		body.flip_h = true
 		flame_animation.flip_h = true
 		#tool.flip(true)
+
+
+
+
+
+
+
+# TODO: Place under Abilities node?
+
+var abilities = []
+
+var loaded_abilities = {}
+
+func load_ability(_name):
+	if loaded_abilities.has(_name):
+		var scene_instance = loaded_abilities[_name]
+		return scene_instance
+	else:
+		var scene = load("res://scenes/abilities/" + _name + "/" + _name + ".tscn")
+		var scene_instance = scene.instantiate()
+		call_deferred("add_child", scene_instance)
+		loaded_abilities[_name] = scene_instance
+		return scene_instance

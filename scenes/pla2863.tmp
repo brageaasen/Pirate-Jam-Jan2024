@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://obks6i6j4mi0"]
+[gd_scene load_steps=77 format=3 uid="uid://obks6i6j4mi0"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player_movement.gd" id="1_7m7id"]
 [ext_resource type="Texture2D" uid="uid://col7roog3y0l" path="res://assets/sprites/entities/player/walk.png" id="2_0eoaq"]
@@ -589,24 +589,6 @@ animation = &"jump_end"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_saatt"]
 animation = &"jump_start"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hx1kx"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hg1ca"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ety4u"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_30lxv"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_hx1kx")
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_hg1ca")
-blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_ety4u")
-blend_point_2/pos = 0.0
-blend_mode = 1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3bdsp"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xtod8"]
@@ -625,12 +607,10 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m5smi"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1uwqv"]
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bhd2g"]
 states/End/position = Vector2(900, 235)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_eusp3")
-states/Move/position = Vector2(396, 235)
+states/Move/position = Vector2(413, 235)
 states/Start/position = Vector2(200, 235)
 states/fall/node = SubResource("AnimationNodeAnimation_3tci6")
 states/fall/position = Vector2(533, 147)
@@ -640,9 +620,7 @@ states/jump_end/node = SubResource("AnimationNodeAnimation_0um12")
 states/jump_end/position = Vector2(606, 235)
 states/jump_start/node = SubResource("AnimationNodeAnimation_saatt")
 states/jump_start/position = Vector2(413, 133)
-states/walk/node = SubResource("AnimationNodeBlendSpace1D_30lxv")
-states/walk/position = Vector2(283, 147)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_3bdsp"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_xtod8"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_ahnph"), "jump_start", "fly", SubResource("AnimationNodeStateMachineTransition_6u2km"), "fly", "jump_end", SubResource("AnimationNodeStateMachineTransition_b21fm"), "fly", "fall", SubResource("AnimationNodeStateMachineTransition_iymrt"), "fall", "jump_end", SubResource("AnimationNodeStateMachineTransition_pawax"), "jump_start", "fall", SubResource("AnimationNodeStateMachineTransition_m5smi"), "Move", "walk", SubResource("AnimationNodeStateMachineTransition_1uwqv")]
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_3bdsp"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_xtod8"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_ahnph"), "jump_start", "fly", SubResource("AnimationNodeStateMachineTransition_6u2km"), "fly", "jump_end", SubResource("AnimationNodeStateMachineTransition_b21fm"), "fly", "fall", SubResource("AnimationNodeStateMachineTransition_iymrt"), "fall", "jump_end", SubResource("AnimationNodeStateMachineTransition_pawax"), "jump_start", "fall", SubResource("AnimationNodeStateMachineTransition_m5smi")]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -740,11 +718,9 @@ libraries = {
 script = ExtResource("12_fhghc")
 
 [node name="Sprite" type="Sprite2D" parent="HandEquip/FlashLight"]
-visible = false
 
 [node name="PointLight2D2" type="PointLight2D" parent="HandEquip/FlashLight"]
 position = Vector2(38, 2)
-enabled = false
 energy = 2.0
 range_layer_min = -100
 shadow_enabled = true
@@ -776,7 +752,6 @@ tree_root = SubResource("AnimationNodeStateMachine_bhd2g")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = -0.000364006
 parameters/fly/blend_position = -0.000364006
-parameters/walk/blend_position = -0.000369966
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("7_83plw")
@@ -788,7 +763,6 @@ current_state = NodePath("Ground")
 script = ExtResource("8_l1l37")
 air_state = NodePath("../Air")
 jump_animation = "jump_start"
-run_animation = "Move"
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state", "fly_state")]
 script = ExtResource("9_wgxy6")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://ewfeuxxygq7s"]
+
+[ext_resource type="PackedScene" uid="uid://u2tm1f7rcbgo" path="res://scenes/entities/enemies/enemy.tscn" id="1_3y65n"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/finite_state_machine.gd" id="2_21qbp"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/enemy_spider.gd" id="2_tg4eu"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_wander_state.gd" id="3_b2oyf"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_chase_state.gd" id="5_63o4x"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_attack_state.gd" id="6_tbl3d"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qq05x"]
+polygon = PackedVector2Array(-6, 6, 3, 7, 9, 6, 10, 3, 11, -3, 8, -7, 4, -8, -5, -8, -8, -6, -10, -2, -10, 1, -9, 4)
+
+[node name="EnemySpider" instance=ExtResource("1_3y65n")]
+position = Vector2(0, 0)
+script = ExtResource("2_tg4eu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+
+[node name="FiniteStateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("state")]
+script = ExtResource("2_21qbp")
+state = NodePath("SpiderWanderState")
+
+[node name="SpiderWanderState" type="Node" parent="FiniteStateMachine" index="0" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("3_b2oyf")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderChaseState" type="Node" parent="FiniteStateMachine" index="1" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("5_63o4x")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderAttackState" type="Node" parent="FiniteStateMachine" index="2"]
+script = ExtResource("6_tbl3d")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="5"]
+occluder = SubResource("OccluderPolygon2D_qq05x")

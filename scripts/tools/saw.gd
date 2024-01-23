@@ -38,7 +38,6 @@ func flip():
 	position.x *= -1
 
 func _physics_process(delta):
-	#print(z_index)
 	if not equipped:
 		return
 	
@@ -73,16 +72,17 @@ func hit_tree():
 	if can_saw:
 		saw_particles.emitting = true
 		z_index = 1
+		tree.take_damage(tree_damage)
 	else:
 		saw_particles.emitting = false
 
-
+var tree : RigidBody2D
 func _on_body_entered(body):
 	if body.is_in_group("tree"):
 		can_saw = true
+		tree = body
 
 func _on_body_exited(body):
 	if body.is_in_group("tree"):
-		print("exit")
 		z_index = 0
 		can_saw = false
