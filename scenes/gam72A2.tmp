@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bi8swcw5iml26"]
+[gd_scene load_steps=26 format=3 uid="uid://dls1b1g6yy0ou"]
 
 [ext_resource type="Script" path="res://scripts/enviorment/world.gd" id="1_7iapm"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_otdtu"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dgkgnqe0dfup8" path="res://assets/background/ground.png" id="7_xhskd"]
 [ext_resource type="PackedScene" uid="uid://obks6i6j4mi0" path="res://scenes/player.tscn" id="8_m436w"]
 [ext_resource type="PackedScene" uid="uid://b2k8g16j4wlab" path="res://scenes/enviorment/tree.tscn" id="17_uuo3r"]
-[ext_resource type="PackedScene" uid="uid://ewfeuxxygq7s" path="res://scenes/entities/enemies/enemy_spider.tscn" id="18_7sb0m"]
+[ext_resource type="Texture2D" uid="uid://x004rcndn0ga" path="res://assets/sprites/enviorment/wood.png" id="18_8ry7y"]
 [ext_resource type="Texture2D" uid="uid://rqvv1rmb54xb" path="res://assets/sprites/cave.png" id="19_x06wb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0kxdq"]
@@ -59,6 +59,9 @@ size = Vector2(16, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52hqe"]
 size = Vector2(604, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktber"]
+size = Vector2(8, 3)
+
 [node name="Game" type="Node"]
 script = ExtResource("1_otdtu")
 
@@ -70,7 +73,6 @@ visible = false
 color = Color(0.968627, 0.556863, 0.643137, 1)
 energy = 0.7
 blend_mode = 1
-range_layer_min = -100
 
 [node name="TempGround" type="TextureRect" parent="World"]
 offset_left = -467.0
@@ -194,6 +196,13 @@ stretch_mode = 1
 [node name="Tree" parent="World" instance=ExtResource("17_uuo3r")]
 position = Vector2(87, -40)
 
-[node name="EnemySpider" parent="World" instance=ExtResource("18_7sb0m")]
-z_index = 1
-position = Vector2(60, -17)
+[node name="tst" type="RigidBody2D" parent="World" groups=["recource"]]
+collision_layer = 32
+
+[node name="Sprite2D" type="Sprite2D" parent="World/tst"]
+position = Vector2(29, -54)
+texture = ExtResource("18_8ry7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/tst"]
+position = Vector2(29, -54)
+shape = SubResource("RectangleShape2D_ktber")
