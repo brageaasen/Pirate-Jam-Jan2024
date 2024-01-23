@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2k8g16j4wlab"]
+[gd_scene load_steps=7 format=3 uid="uid://b2k8g16j4wlab"]
 
 [ext_resource type="Script" path="res://scripts/enviorment/tree.gd" id="1_jpxwn"]
 [ext_resource type="Texture2D" uid="uid://dnb6bl2sgkst2" path="res://assets/sprites/enviorment/tree_trunk.png" id="1_nlq28"]
 [ext_resource type="Texture2D" uid="uid://biiylxebt8gsa" path="res://assets/sprites/enviorment/tree.png" id="2_66ioy"]
-[ext_resource type="PackedScene" uid="uid://dm8j48w416iqm" path="res://scenes/recources/wood.tscn" id="2_a2n8s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlcmp"]
 size = Vector2(2, 6)
@@ -15,6 +14,7 @@ size = Vector2(2, 53)
 radius = 2.0
 
 [node name="Tree" type="Node2D"]
+script = ExtResource("1_jpxwn")
 
 [node name="Trunk" type="StaticBody2D" parent="."]
 collision_layer = 8
@@ -30,8 +30,6 @@ texture = ExtResource("1_nlq28")
 [node name="TreeRb" type="RigidBody2D" parent="." groups=["tree"]]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("1_jpxwn")
-wood_drop = ExtResource("2_a2n8s")
 
 [node name="CollisionTree" type="CollisionShape2D" parent="TreeRb"]
 position = Vector2(3, 7.5)

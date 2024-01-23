@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgv2iojknilpt"]
+
+[ext_resource type="Script" path="res://scripts/abilities/loot_magnet.gd" id="1_s6t4g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1crj"]
+radius = 25.0799
+
+[node name="LootMagnet" type="Node"]
+script = ExtResource("1_s6t4g")
+speed = 15
+radius = 15.0
+
+[node name="MagnetRadius" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetRadius"]
+shape = SubResource("CircleShape2D_a1crj")

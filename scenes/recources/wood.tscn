@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://dm8j48w416iqm"]
+
+[ext_resource type="PackedScene" uid="uid://bsb06jgevwwvb" path="res://scenes/recources/recource.tscn" id="1_0bb26"]
+[ext_resource type="Script" path="res://scripts/recources/wood.gd" id="2_abraa"]
+[ext_resource type="Texture2D" uid="uid://x004rcndn0ga" path="res://assets/sprites/enviorment/wood.png" id="2_jq67n"]
+[ext_resource type="PackedScene" uid="uid://d0y3dnq8is6s0" path="res://scenes/particles/tree_cut.tscn" id="4_taj8l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4ndl"]
+size = Vector2(8, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujve1"]
+size = Vector2(8, 3)
+
+[node name="Wood" instance=ExtResource("1_0bb26")]
+script = ExtResource("2_abraa")
+
+[node name="CollisionShape2D" parent="Pickup" index="0"]
+shape = SubResource("RectangleShape2D_p4ndl")
+
+[node name="Body" parent="." index="1"]
+position = Vector2(0, 0)
+texture = ExtResource("2_jq67n")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("RectangleShape2D_ujve1")
+
+[node name="TreeCut" parent="." index="4" instance=ExtResource("4_taj8l")]
