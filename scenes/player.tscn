@@ -1,7 +1,8 @@
-[gd_scene load_steps=82 format=3 uid="uid://obks6i6j4mi0"]
+[gd_scene load_steps=83 format=3 uid="uid://obks6i6j4mi0"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player_movement.gd" id="1_7m7id"]
 [ext_resource type="Texture2D" uid="uid://col7roog3y0l" path="res://assets/sprites/entities/player/walk.png" id="2_0eoaq"]
+[ext_resource type="Script" path="res://scripts/main_camera.gd" id="2_lsi8j"]
 [ext_resource type="Texture2D" uid="uid://dajptqf6gxfkf" path="res://assets/sprites/entities/player/fly.png" id="2_rw8kt"]
 [ext_resource type="Script" path="res://scripts/entities/player/fly_flame.gd" id="3_v7pq1"]
 [ext_resource type="Texture2D" uid="uid://c22vdtq4cymj2" path="res://assets/sprites/entities/player/fly_side_flame.png" id="4_qvi5t"]
@@ -646,12 +647,12 @@ color = Color(0.956863, 0.956863, 0.956863, 1)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
 script = ExtResource("1_7m7id")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(0, -54.025)
 zoom = Vector2(2.7, 2.7)
+script = ExtResource("2_lsi8j")
 
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("2_0eoaq")

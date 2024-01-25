@@ -6,6 +6,7 @@ extends "res://scripts/entities/entity.gd"
 @onready var animation_tree = $AnimationTree
 @onready var character_state_machine = $CharacterStateMachine
 @onready var flame_animation = $FlyFlame/FlameAnimation
+@onready var main_camera = $MainCamera
 
 var direction : Vector2 = Vector2.ZERO
 
@@ -43,10 +44,15 @@ func update_facing_direction():
 	elif direction.x < 0:
 		body.flip_h = true
 		flame_animation.flip_h = true
-		#tool.flip(true)
 
 
-
+func take_damage(damage):
+	if not dead:
+		# Add screen shake
+		main_camera.shake(2)
+		health -= damage
+		if health <= 0:
+			die()
 
 
 

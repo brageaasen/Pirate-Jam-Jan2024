@@ -1,4 +1,4 @@
-class_name SpiderIdleState
+class_name SpiderHurtState
 extends EnemyState
 
 @export var actor : Enemy
@@ -6,8 +6,7 @@ extends EnemyState
 
 var player
 
-signal attack
-signal chase
+signal finished
 
 func _ready():
 	set_physics_process(false)
@@ -15,7 +14,7 @@ func _ready():
 
 func _enter_state() -> void:
 	set_physics_process(true)
-	animator.play("idle")
+	animator.play("hurt")
 
 func _exit_state() -> void:
 	set_physics_process(false)
@@ -23,10 +22,12 @@ func _exit_state() -> void:
 
 func _physics_process(delta):
 	if not actor.is_on_floor():
-		actor.velocity.y += actor.gravity
-	if actor.inside_attack_radius.size() != 0:
-		attack.emit()
-	elif actor.inside_detect_radius.size() != 0:
-		chase.emit()
+		actor.velocity.y = actor.gravity / 3
+		actor.velocity.x = actor.velocity.x * 0.95
+	else:
+		actor.velocity.y = 0
+		actor.velocity.x = 0
+	if animator.current_animation != "hurt" and actor.is_on_floor():
+		finished.emit()
 	
 	actor.move_and_slide()

@@ -29,11 +29,11 @@ func jump_to_player():
 		actor.velocity.y = -actor.jump_height
 
 func _physics_process(delta) -> void:
-	if actor.is_on_floor() and !actor.animation_player.is_playing():
+	if actor.is_on_floor() and animator.current_animation != "jump":
 		actor.velocity.x = 0
 		# Change state to idle when landed
 		landed.emit()
-		
+	
 	actor.velocity.y += actor.gravity * delta
 	actor.move_and_slide()
 	if player:

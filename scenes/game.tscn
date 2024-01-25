@@ -138,8 +138,6 @@ texture = ExtResource("4_6vf6p")
 
 [node name="Player" parent="World" instance=ExtResource("8_m436w")]
 position = Vector2(127, -70)
-speed = 80.0
-max_health = 100.0
 
 [node name="CollisionPolygon2D" parent="World/Player/HandEquip/FlashLight/Light/Area2D" index="0"]
 polygon = PackedVector2Array(11, 3, 115, 37, 122, 36, 129, 28, 133, 12, 134, -4, 132, -21, 125, -35, 117, -38, 12, -2, 10, 1)
@@ -227,7 +225,6 @@ position = Vector2(87, -40)
 [node name="EnemySpider" parent="World" instance=ExtResource("18_7sb0m")]
 z_index = 1
 position = Vector2(-58, -17)
-attack_damage = 20
 max_health = 1000.0
 
 [editable path="World/Player"]

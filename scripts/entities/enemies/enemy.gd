@@ -36,21 +36,25 @@ func die():
 	# Play explode particles on main scene
 	queue_free()
 
+var is_burning
 var burn_damage
 func burn(damage):
+	if is_burning:
+		return
 	# Play burn particles
 	#$Burn.emitting = true
 	# Apply damage
+	is_burning = true
 	burn_damage = damage
 	take_damage(damage)
 	burn_timer.start()
 
 func stop_burn():
+	is_burning = false
 	burn_timer.stop()
 
 func _on_burn_timer_timeout():
-	print("Took damage: " + str(burn_damage))
-	print("Health: " + str(health))
+	is_burning = false
 	burn(burn_damage)
 
 func attack():
