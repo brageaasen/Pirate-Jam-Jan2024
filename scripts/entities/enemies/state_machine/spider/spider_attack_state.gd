@@ -7,7 +7,6 @@ extends EnemyState
 
 var player
 
-signal lost_player
 signal out_of_range
 
 func _ready() -> void:
@@ -16,19 +15,21 @@ func _ready() -> void:
 
 func _enter_state() -> void:
 	set_physics_process(true)
-	animator.play("idle")
+	animator.play("attack")
 
 func _exit_state() -> void:
 	set_physics_process(false)
 
+func attack():
+	for body in actor.inside_attack_radius:
+		if body.has_method("take_damage"):
+			body.take_damage(actor.attack_damage)
+
+
+
 func _physics_process(delta) -> void:
-	if actor.target:
-		pass
-	# Check if enemy tank should change current state to wander
-	if not actor.target:
-		lost_player.emit()
-	
-	# Check if enemy tank should change current state to chase
-	var distance_to_player = actor.global_position.distance_to(player.global_position)
-	if (actor.attack_range < distance_to_player):
+	if actor.inside_attack_radius.size() == 0 and !actor.animation_player.is_playing():
 		out_of_range.emit()
+	elif !actor.animation_player.is_playing():
+		animator.play("attack")
+	return

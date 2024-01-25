@@ -1,5 +1,11 @@
 extends "res://scripts/tools/tool.gd"
 
+@export var light_damage : int = 5
+
+var inside_light = []
+
+@onready var light = $Light
+
 func look_at_mouse():
 	var mouse_position = get_global_mouse_position()
 	look_at(mouse_position)
@@ -23,6 +29,9 @@ func flip():
 
 func _physics_process(delta):
 	if not equipped:
+		for enemy in inside_light:
+			if enemy.has_method("stop_burn"):
+				enemy.stop_burn()
 		return
 	
 	if Input.is_action_just_pressed("mb_left"):
@@ -33,23 +42,30 @@ func _physics_process(delta):
 	look_at_mouse()
 
 
-@onready var point_light_2d_2 = $PointLight2D2
 
 func equip():
 	equipped = true
 	sprite.visible = true
-	point_light_2d_2.enabled = true
+	light.enabled = true
+	for enemy : Enemy in inside_light:
+		if enemy.has_method("burn"):
+			enemy.burn(light_damage)
 
 func un_equip():
 	equipped = false
 	sprite.visible = false
-	point_light_2d_2.enabled = false
+	light.enabled = false
 
 
-func _on_body_entered(body):
-	if body.is_in_group("tree"):
-		pass
+func _on_light_body_entered(body):
+	if body.is_in_group("enemy"):
+		inside_light.append(body)
+		if body.has_method("burn"):
+				body.burn(light_damage)
 
-func _on_body_exited(body):
-	if body.is_in_group("tree"):
-		pass
+
+func _on_light_body_exited(body):
+	if body.is_in_group("enemy"):
+		inside_light.erase(body)
+		if body.has_method("stop_burn"):
+			body.stop_burn()

@@ -268,7 +268,6 @@ collision_layer = 2
 script = ExtResource("2_tg4eu")
 jump_height = 250
 attack_damage = 20
-jump_length = 5
 attack_range = 20.0
 max_health = 40.0
 

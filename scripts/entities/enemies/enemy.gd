@@ -7,17 +7,53 @@ signal died
 
 # Movement
 @export var max_speed = 40.0
+@export var jump_length = 4
 
 # Combat
 @export var attack_range : float = 60
-@export var detect_radius : int
 var can_attack = true
 var target = null
 
+var animation_player
+
+@onready var burn_timer = $BurnTimer
+@onready var body = $Body
+
 func _ready():
+	animation_player = get_node("AnimationPlayer")
 	health = max_health
 	emit_signal("health_changed", health * 100.0/max_health)
-	$DetectRadius/CollisionShape2D.shape.radius = detect_radius
+
+func take_damage(damage):
+	if not dead:
+		# Play damage particles / animation
+		animation_player.play("take_damage")
+		health -= damage
+		if health <= 0:
+			die()
+
+func die():
+	# Play explode particles on main scene
+	queue_free()
+
+var burn_damage
+func burn(damage):
+	# Play burn particles
+	#$Burn.emitting = true
+	# Apply damage
+	burn_damage = damage
+	take_damage(damage)
+	burn_timer.start()
+
+func stop_burn():
+	burn_timer.stop()
+
+func _on_burn_timer_timeout():
+	print("Took damage: " + str(burn_damage))
+	print("Health: " + str(health))
+	burn(burn_damage)
 
 func attack():
 	pass
+
+

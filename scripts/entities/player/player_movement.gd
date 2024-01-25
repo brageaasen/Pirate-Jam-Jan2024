@@ -7,8 +7,6 @@ extends "res://scripts/entities/entity.gd"
 @onready var character_state_machine = $CharacterStateMachine
 @onready var flame_animation = $FlyFlame/FlameAnimation
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
 
 

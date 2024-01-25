@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var max_health : float = 100
 var health : float
@@ -12,6 +14,7 @@ func take_damage(damage):
 		health -= damage
 		if health <= 0:
 			die()
+		print("took damage")
 
 func die():
 	pass

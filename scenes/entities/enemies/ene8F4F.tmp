@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ewfeuxxygq7s"]
+[gd_scene load_steps=22 format=3 uid="uid://ewfeuxxygq7s"]
 
 [ext_resource type="PackedScene" uid="uid://u2tm1f7rcbgo" path="res://scenes/entities/enemies/enemy.tscn" id="1_3y65n"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/finite_state_machine.gd" id="2_21qbp"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://drxlgyra71pvt" path="res://assets/sprites/entities/enemies/enemy_spider.png" id="3_7lgle"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_wander_state.gd" id="3_b2oyf"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_chase_state.gd" id="5_63o4x"]
-[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_idle_state.gd" id="6_6ns1d"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_attack_state.gd" id="6_tbl3d"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_jump_state.gd" id="7_k2waa"]
 
@@ -40,19 +39,80 @@ tracks/0/keys = {
 "update": 1,
 "values": [5, 6, 7]
 }
-tracks/1/type = "method"
+
+[sub_resource type="Animation" id="Animation_w8rer"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ov0y3"]
+resource_name = "move"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_5egcb"]
+resource_name = "take_damage"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.384314), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FiniteStateMachine/SpiderAttackState")
+tracks/1/path = NodePath("Body:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack"
-}]
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0, 0.0872665, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_rw0wq"]
@@ -126,23 +186,6 @@ tracks/0/keys = {
 "values": [8]
 }
 
-[sub_resource type="Animation" id="Animation_w8rer"]
-resource_name = "idle"
-loop_mode = 1
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
 [sub_resource type="Animation" id="Animation_uq0m6"]
 resource_name = "jump"
 length = 1.2
@@ -158,78 +201,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [12, 13, 14]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FiniteStateMachine/SpiderJumpState")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.9),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"jump_to_player"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_ov0y3"]
-resource_name = "move"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [2, 3, 4]
-}
-
-[sub_resource type="Animation" id="Animation_5egcb"]
-resource_name = "take_damage"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.384314), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Body:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body:skew")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.0872665, 0.0, 0.0872665, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lbnj3"]
@@ -256,20 +227,13 @@ size = Vector2(6, 15)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qq05x"]
 polygon = PackedVector2Array(-6, 0, -2, 2, 5, 1, 12, 1, 21, 1, 24, -4, 20, -9, 14, -11, 9, -11, 4, -8, -11, -13, -26, -11, -30, -6, -28, -2, -17, 0)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bkii2"]
-radius = 18.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdj2g"]
-size = Vector2(1906, 236)
-
 [node name="EnemySpider" groups=["enemy"] instance=ExtResource("1_3y65n")]
 position = Vector2(0, 0)
 collision_layer = 2
 script = ExtResource("2_tg4eu")
-jump_height = 250
-attack_damage = 20
-jump_length = 5
+jump_height = 500
 attack_range = 20.0
+detect_radius = 20
 max_health = 40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
@@ -296,22 +260,6 @@ hframes = 15
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Body" index="0"]
 occluder = SubResource("OccluderPolygon2D_qq05x")
 
-[node name="AttackRadius" type="Area2D" parent="Body" index="1"]
-position = Vector2(31, 0)
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackRadius" index="0"]
-shape = SubResource("CircleShape2D_bkii2")
-
-[node name="DetectRadius" parent="." index="5"]
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" parent="DetectRadius" index="0"]
-position = Vector2(0, -93)
-shape = SubResource("RectangleShape2D_cdj2g")
-
 [node name="FiniteStateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("state")]
 script = ExtResource("2_21qbp")
 state = NodePath("SpiderJumpState")
@@ -321,27 +269,15 @@ script = ExtResource("3_b2oyf")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
-[node name="SpiderIdleState" type="Node" parent="FiniteStateMachine" index="1" node_paths=PackedStringArray("actor", "animator")]
-script = ExtResource("6_6ns1d")
-actor = NodePath("../..")
-animator = NodePath("../../AnimationPlayer")
-
-[node name="SpiderChaseState" type="Node" parent="FiniteStateMachine" index="2" node_paths=PackedStringArray("actor", "animator")]
+[node name="SpiderChaseState" type="Node" parent="FiniteStateMachine" index="1" node_paths=PackedStringArray("actor", "animator")]
 script = ExtResource("5_63o4x")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
-[node name="SpiderJumpState" type="Node" parent="FiniteStateMachine" index="3" node_paths=PackedStringArray("actor", "animator")]
+[node name="SpiderJumpState" type="Node" parent="FiniteStateMachine" index="2" node_paths=PackedStringArray("actor", "animator")]
 script = ExtResource("7_k2waa")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
-[node name="SpiderAttackState" type="Node" parent="FiniteStateMachine" index="4" node_paths=PackedStringArray("actor", "animator")]
+[node name="SpiderAttackState" type="Node" parent="FiniteStateMachine" index="3"]
 script = ExtResource("6_tbl3d")
-actor = NodePath("../..")
-animator = NodePath("../../AnimationPlayer")
-
-[connection signal="body_entered" from="Body/AttackRadius" to="." method="_on_attack_radius_body_entered"]
-[connection signal="body_exited" from="Body/AttackRadius" to="." method="_on_attack_radius_body_exited"]
-[connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
-[connection signal="body_exited" from="DetectRadius" to="." method="_on_detect_radius_body_exited"]
