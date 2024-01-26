@@ -1,0 +1,354 @@
+[gd_scene load_steps=25 format=3 uid="uid://cs8lagp3e4uj3"]
+
+[ext_resource type="Script" path="res://scripts/entities/enemies/enemy_tiny_spider.gd" id="1_7c3ii"]
+[ext_resource type="Texture2D" uid="uid://drxlgyra71pvt" path="res://assets/sprites/entities/enemies/enemy_spider.png" id="2_jm1ob"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/finite_state_machine.gd" id="3_y03o8"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_wander_state.gd" id="4_yjawa"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_idle_state.gd" id="5_4p65v"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_hurt_state.gd" id="6_1m38s"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_chase_state.gd" id="7_fubsx"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_escape_state.gd" id="8_0ahco"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/state_machine/spider/spider_attack_state.gd" id="8_16d5j"]
+
+[sub_resource type="Animation" id="Animation_cd3dc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tq57q"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FiniteStateMachine/SpiderAttackState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"push_enemy"
+}, {
+"args": [],
+"method": &"attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rw0wq"]
+resource_name = "die"
+length = 0.9
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/LightOccluder2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3.14159, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LightOccluder2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-1, 1), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/LightOccluder2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(2, 8), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yeli8"]
+resource_name = "hurt"
+length = 0.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_w8rer"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_uq0m6"]
+resource_name = "jump"
+length = 1.2
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FiniteStateMachine/SpiderJumpState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"jump_to_player"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ov0y3"]
+resource_name = "move"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_5egcb"]
+resource_name = "take_damage"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.384314), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0, 0.0872665, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbnj3"]
+_data = {
+"RESET": SubResource("Animation_cd3dc"),
+"attack": SubResource("Animation_tq57q"),
+"die": SubResource("Animation_rw0wq"),
+"hurt": SubResource("Animation_yeli8"),
+"idle": SubResource("Animation_w8rer"),
+"jump": SubResource("Animation_uq0m6"),
+"move": SubResource("Animation_ov0y3"),
+"take_damage": SubResource("Animation_5egcb")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpp4f"]
+size = Vector2(51, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsw72"]
+size = Vector2(6, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8n8l6"]
+size = Vector2(6, 15)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qq05x"]
+polygon = PackedVector2Array(-6, 0, -2, 2, 5, 1, 12, 1, 21, 1, 24, -4, 20, -9, 14, -11, 9, -11, 4, -8, -11, -13, -26, -11, -30, -6, -28, -2, -17, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bkii2"]
+radius = 22.0227
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdj2g"]
+size = Vector2(1906, 236)
+
+[node name="EnemyTinySpider" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+script = ExtResource("1_7c3ii")
+max_speed = 80.0
+max_health = 40.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lbnj3")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, -4)
+shape = SubResource("RectangleShape2D_dpp4f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-26, 9.5)
+shape = SubResource("RectangleShape2D_fsw72")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(19, 9.5)
+shape = SubResource("RectangleShape2D_8n8l6")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("2_jm1ob")
+hframes = 15
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Body"]
+occluder = SubResource("OccluderPolygon2D_qq05x")
+
+[node name="AttackRadius" type="Area2D" parent="Body"]
+position = Vector2(14, 5)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackRadius"]
+shape = SubResource("CircleShape2D_bkii2")
+
+[node name="DetectRadius" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius"]
+position = Vector2(0, -93)
+shape = SubResource("RectangleShape2D_cdj2g")
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_y03o8")
+state = NodePath("SpiderChaseState")
+
+[node name="SpiderWanderState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("4_yjawa")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("5_4p65v")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderHurtState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("6_1m38s")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderChaseState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("7_fubsx")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderEscapeState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_0ahco")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="SpiderAttackState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_16d5j")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="BurnTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="body_entered" from="Body/AttackRadius" to="." method="_on_attack_radius_body_entered"]
+[connection signal="body_exited" from="Body/AttackRadius" to="." method="_on_attack_radius_body_exited"]
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_detect_radius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_detect_radius_body_exited"]
+[connection signal="timeout" from="BurnTimer" to="." method="_on_burn_timer_timeout"]

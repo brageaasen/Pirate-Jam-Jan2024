@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm8j48w416iqm"]
+[gd_scene load_steps=9 format=3 uid="uid://dm8j48w416iqm"]
 
 [ext_resource type="PackedScene" uid="uid://bsb06jgevwwvb" path="res://scenes/recources/recource.tscn" id="1_0bb26"]
 [ext_resource type="Script" path="res://scripts/recources/wood.gd" id="2_abraa"]
@@ -10,6 +10,15 @@ size = Vector2(8, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujve1"]
 size = Vector2(8, 3)
+
+[sub_resource type="Gradient" id="Gradient_jnwjx"]
+offsets = PackedFloat32Array(0.206186, 0.64433)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xhyp8"]
+gradient = SubResource("Gradient_jnwjx")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Wood" instance=ExtResource("1_0bb26")]
 script = ExtResource("2_abraa")
@@ -25,3 +34,9 @@ texture = ExtResource("2_jq67n")
 shape = SubResource("RectangleShape2D_ujve1")
 
 [node name="TreeCut" parent="." index="4" instance=ExtResource("4_taj8l")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="5"]
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_xhyp8")
+texture_scale = 0.45

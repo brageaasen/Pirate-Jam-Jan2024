@@ -34,7 +34,7 @@ func _physics_process(delta):
 				enemy.stop_burn()
 		return
 	for enemy in inside_light:
-		if enemy.has_method("burn") and enemy.is_burning:
+		if enemy.has_method("burn") and !enemy.is_burning:
 			enemy.burn(light_damage)
 	
 	if Input.is_action_just_pressed("mb_left"):
@@ -58,9 +58,9 @@ func un_equip():
 
 
 func _on_light_body_entered(body):
-	if body.is_in_group("enemy") and light.enabled:
+	if body.is_in_group("enemy"):
 		inside_light.append(body)
-		if body.has_method("burn") and !body.is_burning:
+		if body.has_method("burn") and !body.is_burning and light.enabled:
 			body.burn(light_damage)
 
 

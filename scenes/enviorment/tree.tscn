@@ -29,7 +29,6 @@ texture = ExtResource("1_nlq28")
 
 [node name="TreeRb" type="RigidBody2D" parent="." groups=["tree"]]
 collision_layer = 8
-collision_mask = 9
 script = ExtResource("1_jpxwn")
 wood_drop = ExtResource("2_a2n8s")
 

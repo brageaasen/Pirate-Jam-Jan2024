@@ -8,6 +8,7 @@ class_name GroundState
 @export var walk_animation : String = "walk"
 @export var run_animation : String = "run"
 var player
+var player_start_speed
 
 @onready var tool = $"../../Tool"
 @onready var animation_player = $"../../AnimationPlayer"
@@ -17,8 +18,10 @@ var player
 @onready var flash_light = $"../../HandEquip/FlashLight"
 var all_tools
 
+
 func _ready():
 	player = get_parent().get_parent()
+	player_start_speed = player.speed
 	all_tools = [drill, saw, flash_light]
 
 func state_process(delta):
@@ -44,13 +47,13 @@ func jump():
 
 func walk():
 	# Decrease speed of player
-	player.speed = 40
+	player.speed = player_start_speed / 1.5
 	# Change animation
 	playback.travel(walk_animation)
 
 func run():
 	# Increase speed of player
-	player.speed = 80
+	player.speed = player_start_speed
 	# Change animation
 	playback.travel(run_animation)
 

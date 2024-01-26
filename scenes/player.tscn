@@ -1,13 +1,15 @@
-[gd_scene load_steps=83 format=3 uid="uid://obks6i6j4mi0"]
+[gd_scene load_steps=87 format=3 uid="uid://obks6i6j4mi0"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player_movement.gd" id="1_7m7id"]
 [ext_resource type="Texture2D" uid="uid://col7roog3y0l" path="res://assets/sprites/entities/player/walk.png" id="2_0eoaq"]
 [ext_resource type="Script" path="res://scripts/main_camera.gd" id="2_lsi8j"]
 [ext_resource type="Texture2D" uid="uid://dajptqf6gxfkf" path="res://assets/sprites/entities/player/fly.png" id="2_rw8kt"]
 [ext_resource type="Script" path="res://scripts/entities/player/fly_flame.gd" id="3_v7pq1"]
+[ext_resource type="Script" path="res://scripts/player_light.gd" id="4_7xlig"]
 [ext_resource type="Texture2D" uid="uid://c22vdtq4cymj2" path="res://assets/sprites/entities/player/fly_side_flame.png" id="4_qvi5t"]
 [ext_resource type="Texture2D" uid="uid://duxj5onng8tit" path="res://assets/sprites/entities/player/fly_up_flame.png" id="5_8c1vp"]
 [ext_resource type="Script" path="res://scripts/entities/player/inventory.gd" id="6_phwgr"]
+[ext_resource type="PackedScene" uid="uid://dyhty5crtisg4" path="res://scenes/recources/light_essence.tscn" id="6_tfsww"]
 [ext_resource type="Script" path="res://scripts/tools/drill.gd" id="7_78bb2"]
 [ext_resource type="Script" path="res://scripts/entities/player/character_state_machine.gd" id="7_83plw"]
 [ext_resource type="Script" path="res://scripts/entities/player/ground_state.gd" id="8_l1l37"]
@@ -567,6 +569,17 @@ states/walk/node = SubResource("AnimationNodeBlendSpace1D_30lxv")
 states/walk/position = Vector2(283, 147)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_3bdsp"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_xtod8"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_ahnph"), "jump_start", "fly", SubResource("AnimationNodeStateMachineTransition_6u2km"), "fly", "jump_end", SubResource("AnimationNodeStateMachineTransition_b21fm"), "fly", "fall", SubResource("AnimationNodeStateMachineTransition_iymrt"), "fall", "jump_end", SubResource("AnimationNodeStateMachineTransition_pawax"), "jump_start", "fall", SubResource("AnimationNodeStateMachineTransition_m5smi"), "Move", "walk", SubResource("AnimationNodeStateMachineTransition_1uwqv")]
 
+[sub_resource type="Gradient" id="Gradient_f0673"]
+offsets = PackedFloat32Array(0, 0.304124)
+colors = PackedColorArray(1, 1, 1, 1, 0.0789473, 0.0789473, 0.0789473, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ax67l"]
+gradient = SubResource("Gradient_f0673")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hcuqk"]
 atlas = ExtResource("4_qvi5t")
 region = Rect2(0, 0, 48, 32)
@@ -648,10 +661,11 @@ color = Color(0.956863, 0.956863, 0.956863, 1)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_7m7id")
+speed = 60.0
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2(0, -54.025)
-zoom = Vector2(2.7, 2.7)
+offset = Vector2(0, -15)
+zoom = Vector2(4, 4)
 script = ExtResource("2_lsi8j")
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -662,9 +676,11 @@ hframes = 8
 occluder = SubResource("OccluderPolygon2D_h8xj4")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.5
 range_layer_min = -100
 texture = SubResource("GradientTexture2D_mqb1c")
+offset = Vector2(0, -15)
+texture_scale = 2.0
+script = ExtResource("4_7xlig")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
@@ -676,6 +692,7 @@ shape = SubResource("RectangleShape2D_uksca")
 position = Vector2(4, 5)
 collision_layer = 4
 script = ExtResource("7_78bb2")
+recource_drop = ExtResource("6_tfsww")
 
 [node name="Sprite" type="Sprite2D" parent="HandEquip/Drill"]
 visible = false
@@ -724,6 +741,7 @@ libraries = {
 
 [node name="FlashLight" type="Area2D" parent="HandEquip"]
 script = ExtResource("12_fhghc")
+light_damage = 10
 
 [node name="Sprite" type="Sprite2D" parent="HandEquip/FlashLight"]
 visible = false
@@ -731,6 +749,7 @@ visible = false
 [node name="Light" type="PointLight2D" parent="HandEquip/FlashLight"]
 position = Vector2(47, 0)
 enabled = false
+energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
 shadow_filter = 2
@@ -773,6 +792,7 @@ current_state = NodePath("Ground")
 
 [node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
 script = ExtResource("8_l1l37")
+jump_velocity = -125.0
 air_state = NodePath("../Air")
 jump_animation = "jump_start"
 run_animation = "Move"
@@ -803,8 +823,15 @@ script = ExtResource("6_phwgr")
 position = Vector2(1, 8)
 script = ExtResource("3_v7pq1")
 
-[node name="FlameAnimation" type="AnimatedSprite2D" parent="FlyFlame"]
+[node name="FlyLight" type="PointLight2D" parent="FlyFlame"]
 visible = false
+position = Vector2(-1, 6)
+energy = 0.5
+range_layer_min = -200
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ax67l")
+
+[node name="FlameAnimation" type="AnimatedSprite2D" parent="FlyFlame"]
 position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_7ek63")
 animation = &"fly_up"

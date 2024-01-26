@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://dyhty5crtisg4"]
+
+[ext_resource type="PackedScene" uid="uid://bsb06jgevwwvb" path="res://scenes/recources/recource.tscn" id="1_qx16q"]
+[ext_resource type="Script" path="res://scripts/recources/light_essence.gd" id="2_8smcj"]
+[ext_resource type="Texture2D" uid="uid://b2i6tbyxs2wm1" path="res://assets/sprites/enviorment/light_essence.png" id="3_yyuq3"]
+[ext_resource type="PackedScene" uid="uid://d0y3dnq8is6s0" path="res://scenes/particles/tree_cut.tscn" id="4_51ijx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtoli"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmovs"]
+size = Vector2(4, 4)
+
+[sub_resource type="Gradient" id="Gradient_jnwjx"]
+offsets = PackedFloat32Array(0.206186, 0.64433)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xhyp8"]
+gradient = SubResource("Gradient_jnwjx")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="LightEssence" instance=ExtResource("1_qx16q")]
+script = ExtResource("2_8smcj")
+
+[node name="CollisionShape2D" parent="Pickup" index="0"]
+shape = SubResource("RectangleShape2D_qtoli")
+
+[node name="Body" parent="." index="1"]
+position = Vector2(0, 0)
+texture = ExtResource("3_yyuq3")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("RectangleShape2D_hmovs")
+
+[node name="Destroyed" parent="." index="4" instance=ExtResource("4_51ijx")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="5"]
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_xhyp8")
+texture_scale = 0.45

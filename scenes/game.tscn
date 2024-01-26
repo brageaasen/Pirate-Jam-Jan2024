@@ -1,9 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://bi8swcw5iml26"]
+[gd_scene load_steps=63 format=3 uid="uid://bi8swcw5iml26"]
 
 [ext_resource type="Script" path="res://scripts/enviorment/world.gd" id="1_7iapm"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_otdtu"]
-[ext_resource type="Texture2D" uid="uid://dof2blhvlvj82" path="res://assets/tileset/tileset_test.png" id="2_dptlh"]
-[ext_resource type="Texture2D" uid="uid://bgjlsne6ycih7" path="res://assets/sprites/temp.png" id="2_ksx3w"]
+[ext_resource type="Texture2D" uid="uid://dof2blhvlvj82" path="res://assets/tileset/tileset.png" id="2_dptlh"]
+[ext_resource type="Texture2D" uid="uid://ccrwdlb6ywlyj" path="res://assets/sprites/ground_color.png" id="3_d3fw4"]
 [ext_resource type="Script" path="res://scripts/enviorment/tilemap.gd" id="3_utkyt"]
 [ext_resource type="Texture2D" uid="uid://srce8as2diqu" path="res://assets/sprites/selector.png" id="4_6vf6p"]
 [ext_resource type="Texture2D" uid="uid://klk66st807g3" path="res://assets/background/background_sky.png" id="4_aj4t7"]
@@ -13,25 +13,69 @@
 [ext_resource type="Script" path="res://scripts/enviorment/clounds.gd" id="5_qnh5k"]
 [ext_resource type="Texture2D" uid="uid://da3jx3kq3htfa" path="res://assets/background/trees.png" id="6_3empm"]
 [ext_resource type="Texture2D" uid="uid://l3v4ojwfa6p4" path="res://assets/background/clouds.png" id="6_vrqi4"]
-[ext_resource type="Texture2D" uid="uid://dgkgnqe0dfup8" path="res://assets/background/ground.png" id="7_xhskd"]
 [ext_resource type="PackedScene" uid="uid://obks6i6j4mi0" path="res://scenes/player.tscn" id="8_m436w"]
+[ext_resource type="Texture2D" uid="uid://bopyyocnat3pa" path="res://assets/sprites/cave_walls.png" id="9_8n1db"]
+[ext_resource type="Texture2D" uid="uid://dcw8jc2xdxjx6" path="res://assets/sprites/cave_under.png" id="9_tco6e"]
+[ext_resource type="Texture2D" uid="uid://dgcoxx26uan3l" path="res://assets/sprites/dark_ground_color.png" id="12_8thkr"]
 [ext_resource type="PackedScene" uid="uid://b2k8g16j4wlab" path="res://scenes/enviorment/tree.tscn" id="17_uuo3r"]
-[ext_resource type="PackedScene" uid="uid://ewfeuxxygq7s" path="res://scenes/entities/enemies/enemy_spider.tscn" id="18_7sb0m"]
-[ext_resource type="Texture2D" uid="uid://rqvv1rmb54xb" path="res://assets/sprites/cave.png" id="19_x06wb"]
+[ext_resource type="Texture2D" uid="uid://7tdkblyrdfhm" path="res://assets/sprites/ground2.png" id="19_erw13"]
+[ext_resource type="Texture2D" uid="uid://2522df8b3i44" path="res://assets/sprites/cave.png" id="19_x06wb"]
+[ext_resource type="Texture2D" uid="uid://bm7vp2ak7ag2h" path="res://assets/sprites/roof_ground.png" id="20_4kv8v"]
+[ext_resource type="Texture2D" uid="uid://dfmvnd6lu3j3n" path="res://assets/sprites/enviorment/landing_base.png" id="20_c1lbq"]
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="23_vv78m"]
+[ext_resource type="AudioStream" uid="uid://bdnlkbm8ybr52" path="res://assets/sounds/PlayerHitGround1.wav" id="24_hyf2k"]
+[ext_resource type="AudioStream" uid="uid://cg3rbqaudhcjf" path="res://assets/sounds/PlayerHitGround2.wav" id="25_4xnr8"]
+[ext_resource type="AudioStream" uid="uid://dymq4n5htf4n4" path="res://assets/sounds/PlayerHitGround3.wav" id="26_elpgm"]
+[ext_resource type="AudioStream" uid="uid://bj16eqlkvbgkh" path="res://assets/sounds/PlayerHitGround4.wav" id="27_kbnun"]
+[ext_resource type="AudioStream" uid="uid://bahajw40h5crl" path="res://assets/sounds/PlayerHitGround5.wav" id="28_cmlrf"]
+[ext_resource type="AudioStream" uid="uid://boac664drmgsk" path="res://assets/sounds/PlayerHitGround7.wav" id="29_coh6k"]
+[ext_resource type="AudioStream" uid="uid://di3ospn3sasxd" path="res://assets/sounds/PlayerRun1.wav" id="30_64yw8"]
+[ext_resource type="AudioStream" uid="uid://cdm22taa7s84m" path="res://assets/sounds/PlayerRun2.wav" id="31_3ndug"]
+[ext_resource type="AudioStream" uid="uid://bov3otdggy3tk" path="res://assets/sounds/PlayerRun3.wav" id="32_2n17x"]
+[ext_resource type="AudioStream" uid="uid://cd7fam58gogps" path="res://assets/sounds/PlayerRun4.wav" id="33_8qj7b"]
+[ext_resource type="AudioStream" uid="uid://cs3clbojuqbj7" path="res://assets/sounds/SpiderAttack1.wav" id="34_xy68b"]
+[ext_resource type="AudioStream" uid="uid://8evll74yg0xc" path="res://assets/sounds/SpiderAttack2.wav" id="35_nuk2t"]
+[ext_resource type="AudioStream" uid="uid://c26ou37v8cysd" path="res://assets/sounds/SpiderAttack3.wav" id="36_o25jp"]
+[ext_resource type="AudioStream" uid="uid://cpf7pia3q483e" path="res://assets/sounds/SpiderAttack4.wav" id="37_nk6ap"]
+[ext_resource type="AudioStream" uid="uid://d05r85quvpjvw" path="res://assets/sounds/SpiderAttack5.wav" id="38_x6v3g"]
+[ext_resource type="AudioStream" uid="uid://cb2a2q0femx6" path="res://assets/sounds/SpiderRun1.wav" id="39_0aem4"]
+[ext_resource type="AudioStream" uid="uid://baoamlyby5r8c" path="res://assets/sounds/SpiderRun2.wav" id="40_e1mcm"]
+[ext_resource type="AudioStream" uid="uid://b62j7hc10xkxl" path="res://assets/sounds/SpiderRun3.wav" id="41_8xwds"]
+[ext_resource type="AudioStream" uid="uid://cejc6xve2fwas" path="res://assets/sounds/SpiderRun4.wav" id="42_i2u5p"]
+[ext_resource type="AudioStream" uid="uid://dvmsisaqyn1jl" path="res://assets/sounds/SpiderRun5.wav" id="43_xbkyk"]
+[ext_resource type="AudioStream" uid="uid://cbim7vg6gquni" path="res://assets/sounds/SpiderRun6.wav" id="44_sjaal"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iah0y"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3e7gn"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dkq1y"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8qiq"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sv6fp"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uv5gb"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p46kl"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ebwxd"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_brtpt"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dj188"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bp4v6"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pryx5"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ddqyt"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0kxdq"]
@@ -42,15 +86,10 @@ texture = ExtResource("2_dptlh")
 3:1/0/physics_layer_0/angular_velocity = 0.0
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:1/0 = 0
-4:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_bp4v6")
+4:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ddqyt")
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_0/angular_velocity = 0.0
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:1/0 = 0
-1:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_iah0y")
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0
 1:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_uv5gb")
 1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -61,6 +100,41 @@ texture = ExtResource("2_dptlh")
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_dkq1y")
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_3e7gn")
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_r8qiq")
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_p46kl")
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_brtpt")
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_pryx5")
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_sv6fp")
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_l5aga"]
 occlusion_layer_0/light_mask = 1
@@ -72,10 +146,13 @@ sources/0 = SubResource("TileSetAtlasSource_0kxdq")
 size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw3lx"]
-size = Vector2(16, 160)
+size = Vector2(16.2638, 39.1285)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxuat"]
-size = Vector2(16, 160)
+size = Vector2(16.2638, 38.4411)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bmeu"]
+size = Vector2(816, 14.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52hqe"]
 size = Vector2(604, 16)
@@ -87,22 +164,15 @@ script = ExtResource("1_otdtu")
 script = ExtResource("1_7iapm")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="World"]
-color = Color(0.968627, 0.556863, 0.643137, 1)
-energy = 0.7
 blend_mode = 1
 range_layer_min = -100
-
-[node name="TempGround" type="TextureRect" parent="World"]
-offset_left = -467.0
-offset_right = -427.0
-offset_bottom = 40.0
-scale = Vector2(46.5067, 95)
-texture = ExtResource("2_ksx3w")
 
 [node name="TileMap" type="TileMap" parent="World"]
 tile_set = SubResource("TileSet_l5aga")
 format = 2
 script = ExtResource("3_utkyt")
+max_x = 160
+max_y = 160
 
 [node name="Selector" type="Sprite2D" parent="World/TileMap"]
 visible = false
@@ -110,12 +180,19 @@ texture = ExtResource("4_6vf6p")
 centered = false
 script = ExtResource("5_kwdcy")
 
+[node name="Base" type="Node2D" parent="World"]
+position = Vector2(133, 0)
+
+[node name="Landing" type="Sprite2D" parent="World/Base"]
+texture = ExtResource("20_c1lbq")
+
 [node name="Cave" type="StaticBody2D" parent="World"]
 position = Vector2(208, -16)
 collision_layer = 16
 collision_mask = 0
 
 [node name="Body" type="Sprite2D" parent="World/Cave"]
+position = Vector2(5, 0)
 texture = ExtResource("19_x06wb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave"]
@@ -124,17 +201,43 @@ shape = SubResource("RectangleShape2D_brgm0")
 [node name="EntranceWalls" type="StaticBody2D" parent="World/Cave"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
-position = Vector2(-24, 96)
+position = Vector2(-30.3328, 47.6031)
+rotation = 0.349066
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_pw3lx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
-position = Vector2(24, 96)
+position = Vector2(30.2153, 47.2801)
+rotation = -0.349066
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_vxuat")
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Cave/EntranceWalls"]
-position = Vector2(-24, 96)
-scale = Vector2(1, 10)
-texture = ExtResource("4_6vf6p")
+[node name="Wall1" type="Sprite2D" parent="World/Cave/EntranceWalls"]
+visible = false
+position = Vector2(-23, 107)
+texture = ExtResource("9_8n1db")
+
+[node name="Wall2" type="Sprite2D" parent="World/Cave/EntranceWalls"]
+visible = false
+position = Vector2(25, 107)
+texture = ExtResource("9_8n1db")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(-437, 62)
+shape = SubResource("RectangleShape2D_7bmeu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(437, 61)
+shape = SubResource("RectangleShape2D_7bmeu")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Cave"]
+position = Vector2(0, 42)
+scale = Vector2(2, 3)
+texture = ExtResource("3_d3fw4")
+
+[node name="BodyUnder" type="Sprite2D" parent="World/Cave"]
+position = Vector2(5, 8)
+texture = ExtResource("9_tco6e")
 
 [node name="Player" parent="World" instance=ExtResource("8_m436w")]
 position = Vector2(127, -70)
@@ -209,22 +312,177 @@ offset_bottom = 40.0
 texture = ExtResource("6_3empm")
 stretch_mode = 1
 
+[node name="GroundLayer2" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_mirroring = Vector2(620, 0)
+
+[node name="TempGround" type="TextureRect" parent="World/Background/GroundLayer2"]
+offset_left = -513.0
+offset_top = 246.0
+offset_right = -473.0
+offset_bottom = 286.0
+scale = Vector2(46.5067, 95)
+texture = ExtResource("12_8thkr")
+
+[node name="TempGround2" type="TextureRect" parent="World/Background/GroundLayer2"]
+offset_left = -8193.0
+offset_top = 246.0
+offset_right = -8158.0
+offset_bottom = 275.0
+scale = Vector2(461.597, 1.56571)
+texture = ExtResource("3_d3fw4")
+
+[node name="GroundLayer3" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_mirroring = Vector2(620, 0)
+
+[node name="RoofGround" type="TextureRect" parent="World/Background/GroundLayer3"]
+offset_left = -94.0
+offset_top = 283.0
+offset_right = 526.0
+offset_bottom = 310.0
+texture = ExtResource("20_4kv8v")
+stretch_mode = 2
+
 [node name="GroundLayer" type="ParallaxLayer" parent="World/Background"]
 position = Vector2(0, -240)
 motion_mirroring = Vector2(620, 0)
 
 [node name="Ground" type="TextureRect" parent="World/Background/GroundLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("7_xhskd")
-stretch_mode = 1
+offset_top = 229.0
+offset_right = 620.0
+offset_bottom = 269.0
+texture = ExtResource("19_erw13")
+stretch_mode = 2
 
 [node name="Tree" parent="World" instance=ExtResource("17_uuo3r")]
 position = Vector2(87, -40)
 
-[node name="EnemySpider" parent="World" instance=ExtResource("18_7sb0m")]
-z_index = 1
-position = Vector2(-58, -17)
-max_health = 1000.0
+[node name="Tree2" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(25, -35)
+
+[node name="Tree3" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(283, -37)
+
+[node name="Tree4" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(329, -35)
+
+[node name="Tree5" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(443, -35)
+
+[node name="Tree6" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(539, -36)
+
+[node name="Tree7" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(-51, -37)
+
+[node name="Tree8" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(-97, -33)
+
+[node name="Tree9" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(-132, -35)
+
+[node name="Tree10" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(-199, -36)
+
+[node name="Tree11" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(-253, -38)
+
+[node name="Tree12" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(586, -38)
+
+[node name="Tree13" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(696, -37)
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("23_vv78m")
+
+[node name="PlayerHitGround1" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("24_hyf2k")
+bus = &"Sfx"
+
+[node name="PlayerHitGround2" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("25_4xnr8")
+bus = &"Sfx"
+
+[node name="PlayerHitGround3" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("26_elpgm")
+bus = &"Sfx"
+
+[node name="PlayerHitGround4" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("27_kbnun")
+bus = &"Sfx"
+
+[node name="PlayerHitGround5" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("28_cmlrf")
+bus = &"Sfx"
+
+[node name="PlayerHitGround6" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("27_kbnun")
+bus = &"Sfx"
+
+[node name="PlayerHitGround7" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("29_coh6k")
+bus = &"Sfx"
+
+[node name="PlayerRun1" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("30_64yw8")
+bus = &"Sfx"
+
+[node name="PlayerRun2" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("31_3ndug")
+bus = &"Sfx"
+
+[node name="PlayerRun3" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("32_2n17x")
+bus = &"Sfx"
+
+[node name="PlayerRun4" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("33_8qj7b")
+bus = &"Sfx"
+
+[node name="SpiderAttack1" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("34_xy68b")
+bus = &"Sfx"
+
+[node name="SpiderAttack2" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("35_nuk2t")
+bus = &"Sfx"
+
+[node name="SpiderAttack3" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("36_o25jp")
+bus = &"Sfx"
+
+[node name="SpiderAttack4" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("37_nk6ap")
+bus = &"Sfx"
+
+[node name="SpiderAttack5" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("38_x6v3g")
+bus = &"Sfx"
+
+[node name="SpiderRun1" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("39_0aem4")
+bus = &"Sfx"
+
+[node name="SpiderRun2" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("40_e1mcm")
+bus = &"Sfx"
+
+[node name="SpiderRun3" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("41_8xwds")
+bus = &"Sfx"
+
+[node name="SpiderRun4" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("42_i2u5p")
+bus = &"Sfx"
+
+[node name="SpiderRun5" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("43_xbkyk")
+bus = &"Sfx"
+
+[node name="SpiderRun6" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("44_sjaal")
+bus = &"Sfx"
 
 [editable path="World/Player"]

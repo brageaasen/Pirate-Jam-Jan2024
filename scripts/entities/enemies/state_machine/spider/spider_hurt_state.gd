@@ -14,7 +14,7 @@ func _ready():
 
 func _enter_state() -> void:
 	set_physics_process(true)
-	animator.play("hurt")
+	animator.play("take_damage")
 
 func _exit_state() -> void:
 	set_physics_process(false)
@@ -27,7 +27,8 @@ func _physics_process(delta):
 	else:
 		actor.velocity.y = 0
 		actor.velocity.x = 0
-	if animator.current_animation != "hurt" and actor.is_on_floor():
+	if animator.current_animation != "take_damage" and actor.is_on_floor():
 		finished.emit()
+	
 	
 	actor.move_and_slide()

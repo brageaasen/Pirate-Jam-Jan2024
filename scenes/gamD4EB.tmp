@@ -1,0 +1,332 @@
+[gd_scene load_steps=42 format=3 uid="uid://bi8swcw5iml26"]
+
+[ext_resource type="Script" path="res://scripts/enviorment/world.gd" id="1_7iapm"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_otdtu"]
+[ext_resource type="Texture2D" uid="uid://dof2blhvlvj82" path="res://assets/tileset/tileset.png" id="2_dptlh"]
+[ext_resource type="Texture2D" uid="uid://ccrwdlb6ywlyj" path="res://assets/sprites/ground_color.png" id="3_d3fw4"]
+[ext_resource type="Script" path="res://scripts/enviorment/tilemap.gd" id="3_utkyt"]
+[ext_resource type="Texture2D" uid="uid://srce8as2diqu" path="res://assets/sprites/selector.png" id="4_6vf6p"]
+[ext_resource type="Texture2D" uid="uid://klk66st807g3" path="res://assets/background/background_sky.png" id="4_aj4t7"]
+[ext_resource type="Texture2D" uid="uid://dhvauahtpymwf" path="res://assets/background/hills.png" id="5_keglr"]
+[ext_resource type="Script" path="res://scripts/entities/player/selector.gd" id="5_kwdcy"]
+[ext_resource type="Texture2D" uid="uid://b2tnsas80qqxu" path="res://assets/background/sun.png" id="5_mr1y1"]
+[ext_resource type="Script" path="res://scripts/enviorment/clounds.gd" id="5_qnh5k"]
+[ext_resource type="Texture2D" uid="uid://da3jx3kq3htfa" path="res://assets/background/trees.png" id="6_3empm"]
+[ext_resource type="Texture2D" uid="uid://l3v4ojwfa6p4" path="res://assets/background/clouds.png" id="6_vrqi4"]
+[ext_resource type="PackedScene" uid="uid://obks6i6j4mi0" path="res://scenes/player.tscn" id="8_m436w"]
+[ext_resource type="Texture2D" uid="uid://bopyyocnat3pa" path="res://assets/sprites/cave_walls.png" id="9_8n1db"]
+[ext_resource type="Texture2D" uid="uid://dcw8jc2xdxjx6" path="res://assets/sprites/cave_under.png" id="9_tco6e"]
+[ext_resource type="Texture2D" uid="uid://dgcoxx26uan3l" path="res://assets/sprites/dark_ground_color.png" id="12_8thkr"]
+[ext_resource type="Script" path="res://scripts/player_light.gd" id="12_127lf"]
+[ext_resource type="PackedScene" uid="uid://b2k8g16j4wlab" path="res://scenes/enviorment/tree.tscn" id="17_uuo3r"]
+[ext_resource type="Texture2D" uid="uid://7tdkblyrdfhm" path="res://assets/sprites/ground2.png" id="19_erw13"]
+[ext_resource type="Texture2D" uid="uid://2522df8b3i44" path="res://assets/sprites/cave.png" id="19_x06wb"]
+[ext_resource type="Texture2D" uid="uid://bm7vp2ak7ag2h" path="res://assets/sprites/roof_ground.png" id="20_4kv8v"]
+[ext_resource type="Texture2D" uid="uid://dfmvnd6lu3j3n" path="res://assets/sprites/enviorment/landing_base.png" id="20_c1lbq"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3e7gn"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dkq1y"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8qiq"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sv6fp"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uv5gb"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p46kl"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ebwxd"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_brtpt"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dj188"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pryx5"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ddqyt"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0kxdq"]
+texture = ExtResource("2_dptlh")
+3:1/0 = 0
+3:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_dj188")
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ddqyt")
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_uv5gb")
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ebwxd")
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_dkq1y")
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_3e7gn")
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_r8qiq")
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_p46kl")
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_brtpt")
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_pryx5")
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_sv6fp")
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_l5aga"]
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 12
+sources/0 = SubResource("TileSetAtlasSource_0kxdq")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brgm0"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw3lx"]
+size = Vector2(16, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxuat"]
+size = Vector2(16, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bmeu"]
+size = Vector2(869, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52hqe"]
+size = Vector2(604, 16)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_otdtu")
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("1_7iapm")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="World"]
+blend_mode = 1
+range_layer_min = -100
+
+[node name="TileMap" type="TileMap" parent="World"]
+tile_set = SubResource("TileSet_l5aga")
+format = 2
+script = ExtResource("3_utkyt")
+
+[node name="Selector" type="Sprite2D" parent="World/TileMap"]
+visible = false
+texture = ExtResource("4_6vf6p")
+centered = false
+script = ExtResource("5_kwdcy")
+
+[node name="Base" type="Node2D" parent="World"]
+position = Vector2(133, 0)
+
+[node name="Landing" type="Sprite2D" parent="World/Base"]
+texture = ExtResource("20_c1lbq")
+
+[node name="Cave" type="StaticBody2D" parent="World"]
+position = Vector2(208, -16)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Body" type="Sprite2D" parent="World/Cave"]
+position = Vector2(5, 0)
+texture = ExtResource("19_x06wb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave"]
+shape = SubResource("RectangleShape2D_brgm0")
+
+[node name="EntranceWalls" type="StaticBody2D" parent="World/Cave"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(-24, 96)
+shape = SubResource("RectangleShape2D_pw3lx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(24, 96)
+shape = SubResource("RectangleShape2D_vxuat")
+
+[node name="Wall1" type="Sprite2D" parent="World/Cave/EntranceWalls"]
+visible = false
+position = Vector2(-23, 107)
+texture = ExtResource("9_8n1db")
+
+[node name="Wall2" type="Sprite2D" parent="World/Cave/EntranceWalls"]
+visible = false
+position = Vector2(25, 107)
+texture = ExtResource("9_8n1db")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(-450.5, 168.5)
+shape = SubResource("RectangleShape2D_7bmeu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
+position = Vector2(450.5, 168.5)
+shape = SubResource("RectangleShape2D_7bmeu")
+
+[node name="BodyUnder" type="Sprite2D" parent="World/Cave"]
+position = Vector2(5, 8)
+texture = ExtResource("9_tco6e")
+
+[node name="Player" parent="World" instance=ExtResource("8_m436w")]
+position = Vector2(127, -70)
+
+[node name="PointLight2D" parent="World/Player" index="3"]
+script = ExtResource("12_127lf")
+
+[node name="CollisionPolygon2D" parent="World/Player/HandEquip/FlashLight/Light/Area2D" index="0"]
+polygon = PackedVector2Array(11, 3, 115, 37, 122, 36, 129, 28, 133, 12, 134, -4, 132, -21, 125, -35, 117, -38, 12, -2, 10, 1)
+
+[node name="Ground" type="StaticBody2D" parent="World"]
+position = Vector2(0, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
+position = Vector2(-110, -2)
+shape = SubResource("RectangleShape2D_52hqe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Ground"]
+position = Vector2(526, -2)
+shape = SubResource("RectangleShape2D_52hqe")
+
+[node name="Background" type="ParallaxBackground" parent="World"]
+
+[node name="SkyLayer" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_mirroring = Vector2(620, 0)
+
+[node name="Sky" type="TextureRect" parent="World/Background/SkyLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_aj4t7")
+stretch_mode = 1
+
+[node name="SunLayer" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(-167, -240)
+motion_scale = Vector2(0, 1)
+
+[node name="Sun" type="TextureRect" parent="World/Background/SunLayer"]
+offset_right = 620.0
+offset_bottom = 240.0
+texture = ExtResource("5_mr1y1")
+stretch_mode = 1
+
+[node name="CloudsLayer" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_scale = Vector2(0, 1)
+motion_mirroring = Vector2(620, 0)
+script = ExtResource("5_qnh5k")
+
+[node name="Clouds" type="TextureRect" parent="World/Background/CloudsLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_vrqi4")
+stretch_mode = 1
+
+[node name="HillsLayer" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(620, 0)
+
+[node name="Hills" type="TextureRect" parent="World/Background/HillsLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_keglr")
+stretch_mode = 1
+
+[node name="TreesLayer" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(620, 0)
+
+[node name="Trees" type="TextureRect" parent="World/Background/TreesLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3empm")
+stretch_mode = 1
+
+[node name="GroundLayer2" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_mirroring = Vector2(620, 0)
+
+[node name="TempGround" type="TextureRect" parent="World/Background/GroundLayer2"]
+offset_left = -513.0
+offset_top = 246.0
+offset_right = -473.0
+offset_bottom = 286.0
+scale = Vector2(46.5067, 95)
+texture = ExtResource("12_8thkr")
+
+[node name="TempGround2" type="TextureRect" parent="World/Background/GroundLayer2"]
+offset_left = -513.0
+offset_top = 246.0
+offset_right = -473.0
+offset_bottom = 262.0
+scale = Vector2(49.2262, 9.62597)
+texture = ExtResource("3_d3fw4")
+
+[node name="GroundLayer3" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_mirroring = Vector2(620, 0)
+
+[node name="RoofGround" type="TextureRect" parent="World/Background/GroundLayer3"]
+offset_left = -94.0
+offset_top = 400.0
+offset_right = 526.0
+offset_bottom = 427.0
+texture = ExtResource("20_4kv8v")
+stretch_mode = 2
+
+[node name="GroundLayer" type="ParallaxLayer" parent="World/Background"]
+position = Vector2(0, -240)
+motion_mirroring = Vector2(620, 0)
+
+[node name="Ground" type="TextureRect" parent="World/Background/GroundLayer"]
+offset_top = 229.0
+offset_right = 620.0
+offset_bottom = 269.0
+texture = ExtResource("19_erw13")
+stretch_mode = 2
+
+[node name="Tree" parent="World" instance=ExtResource("17_uuo3r")]
+position = Vector2(87, -40)
+
+[editable path="World/Player"]

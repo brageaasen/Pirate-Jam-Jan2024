@@ -2,8 +2,15 @@ extends "res://scripts/tools/tool.gd"
 
 var tilemap : TileMap
 
+var audio_manager : AudioManager
+
+@export var recource_drop : PackedScene
+
+signal spawn_loot
+
 func _ready():
 	tilemap = get_parent().get_parent().get_parent().get_node("TileMap")
+	audio_manager = get_node("/root/Game/AudioManager")
 
 func look_at_mouse():
 	var mouse_position = get_global_mouse_position()
@@ -73,6 +80,10 @@ func hit_block():
 	var source_id = tilemap.get_cell_source_id(0, tile)
 	if source_id == -1: return
 	var new_id = 1
+	
 	if id.x < 5:
+		audio_manager.play_random_sound(audio_manager.player_hit_ground_sounds)
 		new_id = id.x + 1
-		tilemap.set_cell(0, tile, 0, Vector2(new_id, 1))
+		tilemap.set_cell(0, tile, 0, Vector2(new_id, id.y))
+		if id.x == 4 and id.y == 1: # Broken recource tile
+			emit_signal("spawn_loot", recource_drop, null, tilemap.map_to_local(tile))
