@@ -2,6 +2,8 @@ extends "res://scripts/entities/entity.gd"
 
 @export var speed : float = 80.0
 
+var audio_manager : AudioManager
+
 @onready var body = $Body
 @onready var animation_tree = $AnimationTree
 @onready var character_state_machine = $CharacterStateMachine
@@ -10,6 +12,8 @@ extends "res://scripts/entities/entity.gd"
 
 var direction : Vector2 = Vector2.ZERO
 
+func _ready():
+	audio_manager = get_node("/root/Game/AudioManager")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -22,6 +26,7 @@ func _physics_process(delta):
 	
 	if direction.x != 0 && character_state_machine.check_if_can_move():
 		velocity.x = direction.x * speed
+		audio_manager.play_random_sound(audio_manager.player_run_sounds)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 

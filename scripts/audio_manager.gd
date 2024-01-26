@@ -6,8 +6,8 @@ var sounds = []
 var music = []
 
 var spider_attack_sounds = []
-var spider_walk_sounds = []
-var player_walk_sounds = []
+var spider_run_sounds = []
+var player_run_sounds = []
 var player_hit_ground_sounds = []
 
 # TODO: Clean this code section up
@@ -16,10 +16,10 @@ func _ready():
 		var _name = child_node.get_name()
 		if _name.find("SpiderAttack") > -1:
 			spider_attack_sounds.append(child_node)
-		if _name.find("SpiderWalk") > -1:
-			spider_walk_sounds.append(child_node)
-		if _name.find("PlayerWalk") > -1:
-			player_walk_sounds.append(child_node)
+		if _name.find("SpiderRun") > -1:
+			spider_run_sounds.append(child_node)
+		if _name.find("PlayerRun") > -1:
+			player_run_sounds.append(child_node)
 		if _name.find("PlayerHitGround") > -1:
 			player_hit_ground_sounds.append(child_node)
 		if _name.find("Music") > -1:
@@ -47,6 +47,9 @@ func play_music(_name : String):
 
 # Play random sound from list
 func play_random_sound(list):
+	for sound in list:
+		if sound.playing:
+			return 
 	list.pick_random().play()
 	
 # Play random sound from list

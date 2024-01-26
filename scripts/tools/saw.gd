@@ -50,6 +50,7 @@ func _physics_process(delta):
 
 
 func start_swing():
+	#player.audio_manager.play("PlayerSaw1")
 	is_swinging = true
 	swing_timer.start(swing_time)
 	animation_player.play("swing")

@@ -25,6 +25,7 @@ func _exit_state() -> void:
 
 func _physics_process(delta) -> void:
 	if player:
+		actor.audio_manager.play_random_sound(actor.audio_manager.spider_run_sounds)
 		distance_to_player = (player.global_position - actor.global_position)
 		actor.velocity = distance_to_player.normalized()
 		actor.velocity *= actor.max_speed

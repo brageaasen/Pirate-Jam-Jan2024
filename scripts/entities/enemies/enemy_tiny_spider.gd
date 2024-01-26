@@ -5,6 +5,7 @@ extends "res://scripts/entities/enemies/enemy.gd"
 var inside_detect_radius = []
 var inside_attack_radius = []
 
+var audio_manager : AudioManager
 
 @onready var fsm = $FiniteStateMachine as FiniteStateMachine
 @onready var spider_idle_state = $FiniteStateMachine/SpiderIdleState as SpiderIdleState
@@ -16,6 +17,8 @@ var inside_attack_radius = []
 
 func _ready():
 	super._ready()
+	audio_manager = get_node("/root/Game/AudioManager")
+	
 	# On chase, idle -> chase
 	spider_idle_state.chase.connect(fsm.change_state.bind(spider_chase_state))
 	# On attack, idle -> attack

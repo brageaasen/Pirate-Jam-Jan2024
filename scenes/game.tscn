@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bi8swcw5iml26"]
+[gd_scene load_steps=65 format=3 uid="uid://bi8swcw5iml26"]
 
 [ext_resource type="Script" path="res://scripts/enviorment/world.gd" id="1_7iapm"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_otdtu"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bopyyocnat3pa" path="res://assets/sprites/cave_walls.png" id="9_8n1db"]
 [ext_resource type="Texture2D" uid="uid://dcw8jc2xdxjx6" path="res://assets/sprites/cave_under.png" id="9_tco6e"]
 [ext_resource type="Texture2D" uid="uid://dgcoxx26uan3l" path="res://assets/sprites/dark_ground_color.png" id="12_8thkr"]
+[ext_resource type="PackedScene" uid="uid://ewfeuxxygq7s" path="res://scenes/entities/enemies/enemy_spider.tscn" id="13_bqsqw"]
 [ext_resource type="PackedScene" uid="uid://b2k8g16j4wlab" path="res://scenes/enviorment/tree.tscn" id="17_uuo3r"]
 [ext_resource type="Texture2D" uid="uid://7tdkblyrdfhm" path="res://assets/sprites/ground2.png" id="19_erw13"]
 [ext_resource type="Texture2D" uid="uid://2522df8b3i44" path="res://assets/sprites/cave.png" id="19_x06wb"]
@@ -24,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dfmvnd6lu3j3n" path="res://assets/sprites/enviorment/landing_base.png" id="20_c1lbq"]
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="23_vv78m"]
 [ext_resource type="AudioStream" uid="uid://bdnlkbm8ybr52" path="res://assets/sounds/PlayerHitGround1.wav" id="24_hyf2k"]
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="24_nkxtl"]
 [ext_resource type="AudioStream" uid="uid://cg3rbqaudhcjf" path="res://assets/sounds/PlayerHitGround2.wav" id="25_4xnr8"]
 [ext_resource type="AudioStream" uid="uid://dymq4n5htf4n4" path="res://assets/sounds/PlayerHitGround3.wav" id="26_elpgm"]
 [ext_resource type="AudioStream" uid="uid://bj16eqlkvbgkh" path="res://assets/sounds/PlayerHitGround4.wav" id="27_kbnun"]
@@ -203,13 +205,11 @@ shape = SubResource("RectangleShape2D_brgm0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
 position = Vector2(-30.3328, 47.6031)
 rotation = 0.349066
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_pw3lx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Cave/EntranceWalls"]
 position = Vector2(30.2153, 47.2801)
 rotation = -0.349066
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_vxuat")
 
 [node name="Wall1" type="Sprite2D" parent="World/Cave/EntranceWalls"]
@@ -244,6 +244,9 @@ position = Vector2(127, -70)
 
 [node name="CollisionPolygon2D" parent="World/Player/HandEquip/FlashLight/Light/Area2D" index="0"]
 polygon = PackedVector2Array(11, 3, 115, 37, 122, 36, 129, 28, 133, 12, 134, -4, 132, -21, 125, -35, 117, -38, 12, -2, 10, 1)
+
+[node name="EnemySpider" parent="World" instance=ExtResource("13_bqsqw")]
+position = Vector2(-289, -42)
 
 [node name="Ground" type="StaticBody2D" parent="World"]
 position = Vector2(0, 10)
@@ -394,6 +397,13 @@ position = Vector2(586, -38)
 [node name="Tree13" parent="World" instance=ExtResource("17_uuo3r")]
 position = Vector2(696, -37)
 
+[node name="Spawner" type="Node" parent="World"]
+script = ExtResource("24_nkxtl")
+
+[node name="SpawnTimer" type="Timer" parent="World/Spawner"]
+
+[node name="SpawnLocation" type="Node2D" parent="World/Spawner"]
+
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("23_vv78m")
 
@@ -484,5 +494,7 @@ bus = &"Sfx"
 [node name="SpiderRun6" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("44_sjaal")
 bus = &"Sfx"
+
+[connection signal="timeout" from="World/Spawner/SpawnTimer" to="World/Spawner" method="_on_spawn_timer_timeout"]
 
 [editable path="World/Player"]

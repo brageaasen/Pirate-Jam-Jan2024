@@ -23,6 +23,7 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func attack():
+	actor.audio_manager.play_random_sound(actor.audio_manager.spider_attack_sounds)
 	for body in actor.inside_attack_radius:
 		if body.has_method("take_damage"):
 			body.take_damage(actor.attack_damage)
